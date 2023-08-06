@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="todo-app">
+        <h2>To-Do List <img src="images/icon.png" /></h2>
+        <div class="row">
+          <input type="text" id="input-box" placeholder="Add Your Text" />
+          <button onclick="addTask()">Add</button>
+        </div>
+        <ul class="list-container">
+          <!-- <li class="checked">Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li> -->
+        </ul>
+      </div>
+    </div>
+    <script>
+      const inputBox = document.getElementById("input-box");
+      const listContainer = document.querySelector(".list-container");
+
+      function addTask() {
+        if (inputBox.value === "") {
+          alert("You must write something!");
+        } else {
+          let li = document.createElement("li");
+          li.textContent = inputBox.value;
+          listContainer.appendChild(li);
+          inputBox.value = "";
+          let span = document.createElement("span");
+          span.innerHTML = "\u00d7";
+          li.appendChild(span);
+        }
+      }
+
+      listContainer.addEventListener(
+        "click",
+        function (e) {
+          if (e.target.tagName === "LI") {
+            e.target.classList.toggle("checked"); // Add or remove 'checked' class on LI click
+          } else if (e.target.tagName === "SPAN") {
+            e.target.parentElement.remove(); // Remove the parent LI when the span is clicked
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
